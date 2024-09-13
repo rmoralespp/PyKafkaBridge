@@ -35,6 +35,7 @@ forma concurrente y eficiente.
 El script acepta varios parámetros para configurar la conexión a Kafka y la gestión de tópicos. Aquí están los
 parámetros más importantes:
 
+```
 --server: Dirección del servidor Kafka (por defecto: 127.0.0.1:29092).
 --topic: Nombre del tópico Kafka (por defecto: my-kafka-topic).
 --num_messages: Número de mensajes a enviar a cada partición (por defecto: 20).
@@ -42,6 +43,7 @@ parámetros más importantes:
 --num_partitions: Número de particiones del tópico (por defecto: 3).
 --delay: Retraso entre los mensajes enviados por el productor en segundos (por defecto: 0).
 --output: Archivo de salida donde se guardarán los mensajes consumidos (por defecto: output.jsonl).
+```
 
 Primero, asegúrate de que Kafka esté corriendo y que hayas creado el tópico con el número de particiones especificado.
 Luego, puedes ejecutar el script de la siguiente manera:
