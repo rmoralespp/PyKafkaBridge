@@ -22,7 +22,7 @@ forma concurrente y eficiente.
 
 ### Instalación de dependencias de Python.
 
-`pip install - requirements.txt`
+`pip install -r requirements.txt`
 
 ## Arrancar Infraestructura Kafka
 
