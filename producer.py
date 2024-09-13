@@ -11,8 +11,7 @@ class Producer:
     de mensajes y una clave de partición.
 
     - Comprime los mensajes con gzip para reducir el tamaño de los mensajes.
-    - Enviar los mensajes con una clave fija para garantizar que todos los mensajes
-      se envíen a la misma partición.
+    - Envía todos los mensajes a la partición dada.
     - Se utiliza ACK de tipo "all" para confirmar la recepción de mensajes de todas nuestras particiones.
     - Con el fin de aumentar el rendimiento estableceremos el tamaño del
       bloque a 32 KB(se recomienda entre 32 y 64 KB para mejorar el rendimiento) e introduciremos un
