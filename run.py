@@ -43,4 +43,4 @@ if __name__ == "__main__":
     multiprocess(produce_messages, send_args)
     # Consume mensajes en paralelo para cada partición del tópico especificado.
     cons_args = ((args.server, args.topic, args.consumer_group, n, args.output) for n in partitions)
-    multiprocess(consume_messages, tuple(cons_args))
+    multiprocess(consume_messages, cons_args)
