@@ -25,10 +25,12 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-      - name: Run Docker Compose to start Kafka
-        run: docker-compose -f "docker-compose.yml" up -d
-
+          
+      - name: Spin-Up Docker Compose
+        uses: s3i7h/spin-up-docker-compose-action@v1.2
+        with:
+          file:  docker-compose.yml
+          
       - name: Wait for Kafka to be ready
         run: |
           sleep 30  # Ajusta este tiempo si es necesario para que Kafka esté listo
