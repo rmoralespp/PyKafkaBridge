@@ -5,7 +5,7 @@ import kafka
 import kafka.errors
 
 
-class Producer:
+class JsonProducer:
     """
     Envia mensajes en formato JSON a un tópico de Kafka a partir de un número
     de mensajes y una clave de partición.
@@ -45,7 +45,7 @@ class Producer:
             value = {
                 "topic": self.topic,
                 "msg_id": num,
-                "producer_partition_id": partition_id,
+                "produced_partition_id": partition_id,
             }
             self.producer.send(self.topic, value=value, partition=partition_id)
             time.sleep(self.delay)
