@@ -1,39 +1,47 @@
 name: Kafka Workflow
 
-'on':
+on:
   workflow_dispatch:
     inputs:
       topic:
-        description: Kafka Topic
+        description: 'Kafka Topic'
         required: true
-        default: pizza
+        default: 'pizza'
+
 jobs:
   kafka-bridge:
     runs-on: ubuntu-latest
+
     steps:
-        - name: Checkout repository
-          uses: actions/checkout@v3
-  
-        - name: Set up Docker Compose
-          uses: docker/setup-buildx-action@v2
-  
-        - name: Set up Python
-          uses: actions/setup-python@v4
-          with:
-            python-version: '3.12.3'
-  
-        - name: Install dependencies
-          run: |
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
-  
-        - name: Run Docker Compose to start Kafka
-          run: |
-            docker-compose -f docker-compose.yml up -d
-  
-        - name: Wait for Kafka to be ready
-          run: |
-            sleep 30  # Ajusta este tiempo si es necesario para que Kafka esté listo
-            
-        - name: Run using (2 partitions/groups) to send/consume 50 messages from a given topic
-          run: 'python run.py --topic=${{ github.event.inputs.topic }} --num_messages=50 --num_partitions=2'
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Set up Docker Compose
+        uses: docker/setup-buildx-action@v2
+        with:
+          version: '2.15.0'  # Especifica la versión de Docker Compose que necesitas
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12.3'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Docker Compose to start Kafka
+        run: |
+          docker-compose -f docker-compose.yml up -d
+
+      - name: Wait for Kafka to be ready
+        run: |
+          sleep 30  # Ajusta este tiempo si es necesario para que Kafka esté listo
+
+      - name: Run the Kafka producer/consumer script
+        run: |
+          python run.py --topic=${{ github.event.inputs.topic }} --num_messages=50 --num_partitions=2
